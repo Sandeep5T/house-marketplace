@@ -4,6 +4,7 @@ import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRig
 import { useNavigate, Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,45 +43,43 @@ function SignIn() {
         <header>
           <p className="pageHeader">Welcome back!</p>
         </header>
-        <main>
-          <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={onChange}
+            className="emailInput"
+          />
+          <div className="passwordInputDiv">
             <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              value={email}
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
               onChange={onChange}
-              className="emailInput"
+              className="passwordInput"
             />
-            <div className="passwordInputDiv">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={onChange}
-                className="passwordInput"
-              />
-              <img
-                src={visibilityIcon}
-                alt="show password"
-                className="showPassword"
-                onClick={() => setShowPassword((prevState) => !prevState)}
-              />
-            </div>
-            <Link to="/forgot-password" className="forgotPasswordLink">
-              Forgot Password?
-            </Link>
-            <div className="signInBar">
-              <p className="signInText">Sign In</p>
-              <button className="signInButton">
-                <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
-              </button>
-            </div>
-          </form>
-        </main>
+            <img
+              src={visibilityIcon}
+              alt="show password"
+              className="showPassword"
+              onClick={() => setShowPassword((prevState) => !prevState)}
+            />
+          </div>
+          <Link to="/forgot-password" className="forgotPasswordLink">
+            Forgot Password?
+          </Link>
+          <div className="signInBar">
+            <p className="signInText">Sign In</p>
+            <button className="signInButton">
+              <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
+            </button>
+          </div>
+        </form>
 
-        {/* Google-OAuth */}
+        <OAuth />
 
         <Link to="/sign-up" className="registerLink">
           Sign Up Instead
