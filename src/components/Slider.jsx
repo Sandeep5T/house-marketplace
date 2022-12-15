@@ -56,10 +56,15 @@ function Slider() {
               <div
                 className="swiperSlideDiv"
                 style={{
-                  background: `url(${data.imageUrls[0]}) center no-repeat`,
+                  background: `center no-repeat`,
+                  //   background: `url(${data.imageUrls[0]}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
               >
+                <img
+                  src={data.imageUrls[0]}
+                  style={{ width: "100%", height: "100%" }}
+                />
                 <p className="swiperSlideText">{data.name}</p>
                 <p className="swiperSlidePrice">
                   ${data.discountedPrice ?? data.regularPrice}{" "}
