@@ -609,7 +609,9 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.profile {
+.profile,
+.explore,
+.pageContainer {
   margin-bottom: 10rem;
 }
 
