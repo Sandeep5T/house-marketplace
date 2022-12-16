@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { db } from "../firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 function Contact() {
   const [landlord, setLandlord] = useState(null);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const params = useParams();
+  //eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getLandlord = async () => {
@@ -19,14 +22,20 @@ function Contact() {
         setLandlord(docSnap.data());
       } else {
         toast.error("Could not fetch landlord details");
+        navigate("/sign-in");
       }
+      setLoading(false);
     };
     getLandlord();
-  }, [params.landlordId]);
+  }, [params.landlordId, navigate]);
 
   const onChange = (e) => {
     setMessage(e.target.value);
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div className="pageContainer">
       <header>

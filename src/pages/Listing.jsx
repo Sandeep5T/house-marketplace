@@ -29,7 +29,6 @@ function Listing() {
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data());
         setListing(docSnap.data());
         setLoading(false);
       }
@@ -40,8 +39,6 @@ function Listing() {
   if (loading) {
     return <Spinner />;
   }
-
-  console.log(listing.imageUrls);
 
   return (
     <main>

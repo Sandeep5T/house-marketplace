@@ -26,7 +26,6 @@ function Slider() {
         return listings.push({ id: doc.id, data: doc.data() });
       });
 
-      console.log(listings);
       setListings(listings);
       setLoading(false);
     };
@@ -35,6 +34,10 @@ function Slider() {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (listings.length === 0) {
+    return <></>;
   }
   return (
     listings && (
@@ -64,6 +67,7 @@ function Slider() {
                 <img
                   src={data.imageUrls[0]}
                   style={{ width: "100%", height: "100%" }}
+                  alt={data.name}
                 />
                 <p className="swiperSlideText">{data.name}</p>
                 <p className="swiperSlidePrice">
