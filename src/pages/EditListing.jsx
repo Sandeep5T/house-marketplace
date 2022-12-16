@@ -25,10 +25,10 @@ function EditListing() {
 
   //Redirect if listing is not users
   useEffect(() => {
-    if (listing.userRef !== auth.currentUser.uid) {
+    if (listing && listing.userRef !== auth.currentUser.uid) {
       toast.error("You cannot edit thiss listing");
+      navigate("/");
     }
-    navigate("/");
   });
 
   //Sets userRef in form to logged in user
