@@ -58,7 +58,11 @@ function EditListing() {
 
       if (docSnap.exists()) {
         setListing(docSnap.data());
-        setFormData({ ...docSnap.data(), address: docSnap.data().location });
+        setFormData({
+          ...docSnap.data(),
+          address: docSnap.data().location,
+          images: docSnap.data().imageUrls,
+        });
         setLoading(false);
       } else {
         navigate("/");
@@ -466,7 +470,7 @@ function EditListing() {
           <input
             type="file"
             id="images"
-            required
+            // required
             multiple
             onChange={onMutate}
             className="formInputFile"
